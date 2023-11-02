@@ -1,24 +1,30 @@
 import React from 'react';
-import MemorizzText from '../assets/memoriesText.png';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-const Post = () => {
+const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
+    console.log('cover', cover)
     return (
         <>
             <div className='post'>
                 <div className='image'>
-                    <img src={MemorizzText} alt="" />
+                    <Link to={`/post/${_id}`}>
+                        <img src={'http://localhost:5000/' + cover} alt="" />
+                    </Link>
                 </div>
                 <div className='texts'>
-                    <h2>Full house Party</h2>
+                    <Link to={`/post/${_id}`}>
+                        <h2>{title}</h2>
+                    </Link>
                     <p className='info'>
-                        <a className='author' href='#/'>Blog App</a>
-                        <time>2023-22-01 12:43</time>
+                        <a className='author' href='#/'>{author.username}</a>
+                        <time>{moment(createdAt)?.format("DD/MM/YYYY")}</time>
                     </p>
-                    <p className='summary'>Today we make a Blog App MERN</p>
+                    <p className='summary'>{summary}</p>
                 </div>
             </div>
         </>
     )
 }
 
-export default Post
+export default Post;
